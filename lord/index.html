@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    
+    <meta charset="UTF-8">
+    <title>The Eukaryotic - Fandom Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Bebas+Neue:400,700|Oswald:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        #loader-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: #fff;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .loader {
+            width: 40px;
+            height: 40px;
+            position: relative;
+            --c:no-repeat linear-gradient(#25b09b 0 0);
+            background:
+                var(--c) center/100% 10px,
+                var(--c) center/10px 100%;
+        }
+        .loader:before {
+            content:'';
+            position: absolute;
+            inset: 0;
+            background:
+                var(--c) 0    0,
+                var(--c) 100% 0,
+                var(--c) 0    100%,
+                var(--c) 100% 100%;
+            background-size: 15.5px 15.5px;
+            animation: l16 1.5s infinite cubic-bezier(0.3,1,0,1);
+        }
+        @keyframes l16 {
+            33%  {inset:-10px;transform: rotate(0deg)}
+            66%  {inset:-10px;transform: rotate(90deg)}
+            100% {inset:0    ;transform: rotate(90deg)}
+        }
+        .body-bg-video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            transform: translate(-50%, -50%);
+        }
+        h1.arcade-sign {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 3rem;
+            color: #39ff14;
+            text-shadow:
+                0 0 5px #39ff14,
+                0 0 10px #39ff14,
+                0 0 20px #ff00de,
+                0 0 40px #ff00de;
+            letter-spacing: 0.2em;
+            text-align: center;
+            margin: 0.5em 0;
+            position: relative;
+            z-index: 1;
+        }
+        h1.arcade-sign::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            bottom: -8px;
+            left: 0;
+            background: linear-gradient(90deg, transparent, #ff0080, transparent);
+            z-index: -1;
+        }
+        .arcade-sign {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 3rem;
+            color: #fff900;
+            padding: 40px 60px;
+            border: 8px solid #00fff7;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #ff00cc 0%, #00fff7 100%);
+            box-shadow: 0 0 40px #ff00cc, 0 0 80px #00fff7;
+            text-shadow:
+                2px 2px 0 #ff00cc,
+                4px 4px 0 #00fff7,
+                0 0 10px #fff900;
+            letter-spacing: 8px;
+            position: relative;
+        }
+        .arcade-sign::before, .arcade-sign::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #fff900;
+            top: -20px;
+            left: -20px;
+            /* Removed purple circle (#ff00cc) from box-shadow */
+            box-shadow: 420px 0 #fff900, 210px 80px #00fff7;
+            opacity: 0.7;
+            z-index: -1;
+        }
+        .arcade-sign::after {
+            top: auto;
+            bottom: -20px;
+            left: auto;
+            right: -20px;
+            background: #00fff7;
+            /* Removed purple circle (#ff00cc) from box-shadow */
+            box-shadow: -420px 0 #00fff7, -210px -80px #fff900;
+        }
+        .center-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+        }
+        .wooden-sign-btn {
+            display: inline-block;
+            margin: 32px auto 0 auto;
+            padding: 24px 60px;
+            font-family: 'Luckiest Guy', 'Bangers', cursive;
+            font-size: 2rem;
+            color: #4b2e05;
+            background: linear-gradient(120deg, #e2b76b 60%, #b07d32 100%);
+            border: 6px solid #7a4a13;
+            border-radius: 18px;
+            box-shadow:
+                0 6px 0 #7a4a13,
+                0 12px 24px rgba(0,0,0,0.3);
+            text-shadow:
+                1px 1px 0 #fff8c6,
+                2px 2px 0 #b07d32;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.1s;
+            letter-spacing: 2px;
+            outline: none;
+        }
+        .wooden-sign-btn:active {
+            transform: translateY(4px);
+            box-shadow:
+                0 2px 0 #7a4a13,
+                0 6px 12px rgba(0,0,0,0.2);
+        }
+        .wooden-sign-btn::before, .wooden-sign-btn::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 12px;
+            background: #7a4a13;
+            border-radius: 6px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-10deg);
+            z-index: -1;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        .wooden-sign-btn::before {
+            left: -50px;
+        }
+        .wooden-sign-btn::after {
+            right: -50px;
+            transform: translateY(-50%) rotate(10deg);
+        }
+    </style>
+</head>
+<body>
+    <div id="loader-bg">
+        <div class="loader"></div>
+    </div>
+
+    <video autoplay muted loop playsinline class="body-bg-video">
+        <source src="night-city-pixel-moewalls-com.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="center-container" style="flex-direction:column;">
+        <h1 class="arcade-sign">EQUARYOTIC</h1>
+        <button class="wooden-sign-btn" onclick="window.location.href='WebPage.html'">Start Your Journey</button>
+    </div>
+    
+
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.getElementById('loader-bg').style.display = 'none';
+            }, 2500);
+        });
+    </script>
+</body>
+</html>
+
+
